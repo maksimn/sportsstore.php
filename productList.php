@@ -9,11 +9,19 @@
    <?php
       require_once("connectionvars.php");
 
-      $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME)
-         or die('Error connecting to MySQL server.');
-      $query = "SELECT * FROM Products";
-      $result = mysqli_query($dbc, $query) or die('Error querying database.');
+      // Задаём параметры разбиения на страницы:
+      $page = 1;
+      if(isset($_GET['page'])) {
+         $page = $_GET['page'];
+      }
+      $pagesize = 4;
+
+      // Извлекаем данные из базы для данной страницы:
+      $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME);
+      $query = 'SELECT * FROM Products LIMIT ' . (($page - 1)*$pagesize) . ', ' . $pagesize;
+      $result = mysqli_query($dbc, $query);
       
+      // Показываем извлеченную информацию на странице:
       while ($row = mysqli_fetch_array($result)) {
          $name = $row['Name'];
          $description = $row['Description'];
