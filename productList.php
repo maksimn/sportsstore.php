@@ -10,10 +10,7 @@
       require_once("connectionvars.php");
 
       // Задаём параметры разбиения на страницы:
-      $page = 1;
-      if(isset($_GET['page'])) {
-         $page = $_GET['page'];
-      }
+      $page = isset($_GET['page']) ? $_GET['page'] : 1;
       $pagesize = 4;
 
       // Извлекаем данные из базы для данной страницы:
