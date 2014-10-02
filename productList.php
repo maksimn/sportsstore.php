@@ -26,11 +26,13 @@
          $name = $row['Name'];
          $description = $row['Description'];
          $price = $row['Price'];
-         echo '<div class="item">';
-         echo '<h3>' . $name . '</h3>';
-         echo '<p>' . $description . '</p>';
-         echo '<h4>' . $price . '</h4>';
-         echo '</div>';
+   ?>
+         <div class="item">
+            <h3><?php echo $name; ?></h3>
+            <p><?php echo $description; ?></p>
+            <h4><?php echo $price; ?></h4>
+         </div>
+   <?php 
       } 
    ?>
 </body>
