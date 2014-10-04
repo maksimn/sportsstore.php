@@ -13,9 +13,6 @@
       
       // Задаём параметры разбиения на страницы:
       $pagingInfo = new PagingInfo();
-      $pagingInfo->set_current_page();
-      $pagingInfo->set_total_items();
-      $pagingInfo->set_total_pages();
 
       // Извлечение и показ списка товаров:
       $productRepository = new ProductRepository();
