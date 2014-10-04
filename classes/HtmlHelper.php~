@@ -5,10 +5,10 @@
          $curr_page = $paginginfo->current_page; 
          for($i = 1; $i <= $n; $i++) {
             if($i == $curr_page) {
-               echo '<a class="selected" href="' . $scriptname . '?page=' . $i . '">' . $i . '</a>';
+               echo '<a class="pager selected" href="' . $scriptname . '?page=' . $i . '">' . $i . '</a>';
             } 
             else {
-               echo '<a href="' . $scriptname . '?page=' . $i . '">' . $i . '</a>';
+               echo '<a class="pager" href="' . $scriptname . '?page=' . $i . '">' . $i . '</a>';
             }
          }
       }

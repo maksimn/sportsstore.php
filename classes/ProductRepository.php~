@@ -1,5 +1,5 @@
 <?php
-   require_once('data/connectionvars.php');
+   require_once('connectionvars.php');
    class ProductRepository {
       public $sql_query_result;
       public function extract_data_from_db($beg, $num) {

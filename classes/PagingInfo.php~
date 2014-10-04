@@ -1,5 +1,5 @@
 <?php
-   require_once("data/connectionvars.php");
+   require_once("connectionvars.php");
    class PagingInfo {
       public $items_per_page;
       public $total_items;
