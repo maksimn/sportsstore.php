@@ -6,9 +6,9 @@
 </head>
 <body>
    <?php
-      require_once("PagingInfo.php");
-      require_once("ProductRepository.php");
-      require_once("HtmlHelper.php");
+      require_once("classes/PagingInfo.php");
+      require_once("classes/ProductRepository.php");
+      require_once("classes/HtmlHelper.php");
       
       // Задаём параметры разбиения на страницы:
       $pagingInfo = new PagingInfo();
