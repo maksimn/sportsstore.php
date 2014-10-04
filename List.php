@@ -9,7 +9,6 @@
       require_once("PagingInfo.php");
       require_once("ProductRepository.php");
       require_once("HtmlHelper.php");
-      define('THIS_SCRIPT_NAME', 'List.php');
       
       // Задаём параметры разбиения на страницы:
       $pagingInfo = new PagingInfo();
@@ -23,7 +22,7 @@
    <p>
    <?php // Отображение ссылок на страницы:
       $htmlhelper = new HtmlHelper();
-      $htmlhelper->show_page_links($pagingInfo, THIS_SCRIPT_NAME);
+      $htmlhelper->show_page_links($pagingInfo, $_SERVER['PHP_SELF']);
    ?>
    </p>
 </body>
