@@ -3,13 +3,14 @@
    require_once("classes/ProductListViewModel.php");
    require_once("classes/HtmlHelper.php");
 
-   $productListViewModel = new ProductListViewModel(new ProductRepository(), new PagingInfo());
+   $paginginfo = new PagingInfo();
+   $productListViewModel = new ProductListViewModel(new ProductRepository(), $paginginfo);
    $productListViewModel->show();
 ?>
 <div class="pager">
 <?php // Отображение ссылок на страницы:
    $htmlhelper = new HtmlHelper();
-   $htmlhelper->show_page_links($pagingInfo, $_SERVER['PHP_SELF']);
+   $htmlhelper->show_page_links($paginginfo, $_SERVER['PHP_SELF']);
 ?>
 </div>
 <?php
