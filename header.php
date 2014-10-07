@@ -11,7 +11,15 @@
       <div class="title">SPORTS STORE</div>
    </div>
    <div id="categories">
-      We will put sth useful here later
+      <a href="list.php">Home</a><br />
+      <?php
+         require_once("classes/NavigationMenu.php");
+         $navMenu = new NavigationMenu();
+         $catlist = $navMenu->get_categories();
+         foreach($catlist as $cat) {
+            echo '<a href="list.php?category='. $cat .'&page=1">' . $cat . '</a><br />';
+         }
+      ?>
    </div>
    <div id="content">
 
