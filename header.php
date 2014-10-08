@@ -16,8 +16,11 @@
          require_once("classes/NavigationMenu.php");
          $navMenu = new NavigationMenu();
          $catlist = $navMenu->get_categories();
+         $selectedcategory = isset($_GET['category']) ? $_GET['category'] : NULL;
          foreach($catlist as $cat) {
-            echo '<a href="list.php?category='. $cat .'&page=1">' . $cat . '</a><br />';
+            echo $cat == $selectedcategory ?
+            '<a class="selected" href="list.php?category='.$cat.'&page=1">'.$cat.'</a><br />':
+            '<a href="list.php?category='. $cat .'&page=1">' . $cat . '</a><br />';
          }
       ?>
    </div>

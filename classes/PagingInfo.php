@@ -15,8 +15,10 @@
          $this->current_page = isset($_GET['page']) ? $_GET['page'] : 1;
       }
       public function set_total_items() {
+         $currentcategory = isset($_GET['category']) ? $_GET['category'] : NULL;
          $dbc2 = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME);
-         $query2 = 'SELECT COUNT(*) AS num_products FROM Products';
+         $query2 = ($currentcategory == NULL) ? 'SELECT COUNT(*) AS num_products FROM Products' : 
+         'SELECT COUNT(*) AS num_products FROM Products WHERE Category = "' . $currentcategory . '"';
          $result2 = mysqli_query($dbc2, $query2);
          $row2 = mysqli_fetch_array($result2);
          mysqli_close($dbc2);
