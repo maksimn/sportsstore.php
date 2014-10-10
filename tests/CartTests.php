@@ -43,4 +43,25 @@
       }      
    }
    can_remove_line();
+   function calculate_cart_total() {
+      $p1 = new Product(); $p1->productID = 1; $p1->name = "P1"; $p1->price = 100;
+      $p2 = new Product(); $p2->productID = 2; $p2->name = "P2"; $p2->price = 50;
+      $target = new Cart();
+      $target->add_item($p1, 1);
+      $target->add_item($p2, 1);
+      $target->add_item($p1, 3);
+      $result = $target->compute_total_price();
+      echo 'calculate_cart_total() Test 1: ' . ($result == 450 ? 'passed' : 'not passed'); echo '<br/>';       
+   }
+   calculate_cart_total();
+   function can_clear_contents() {
+      $p1 = new Product(); $p1->productID = 1; $p1->name = "P1"; $p1->price = 100;
+      $p2 = new Product(); $p2->productID = 2; $p2->name = "P2"; $p2->price = 50;
+      $target = new Cart();
+      $target->add_item($p1, 1);
+      $target->add_item($p2, 1);
+      $target->clear();      
+      echo 'can_clear_contents() Test 1: ' . (count($target->lines()) == 0 ? 'passed' : 'not passed'); echo '<br/>';       
+   }
+   can_clear_contents();
 ?>

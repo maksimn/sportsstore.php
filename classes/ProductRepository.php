@@ -17,6 +17,7 @@
       }
       public function show_extracted_data_on_this_page() {
          while ($row = mysqli_fetch_array($this->sql_query_result)) {
+            $productID = $row['ProductID'];
             $name = $row['Name'];
             $description = $row['Description'];
             $price = $row['Price'];
@@ -24,7 +25,15 @@
          <div class="item">
             <h3><?php echo $name; ?></h3>
             <p><?php echo $description; ?></p>
-            <h4><?php echo $price; ?></h4>
+            <form method="GET" action="cart.php">
+               <input type="hidden" name="id" value="<?php echo $productID; ?>"/>
+<!--
+               <input type="hidden" name="returnUrl" 
+                  value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . $_SERVER['QUERY_STRING']; ?>"/>
+-->
+               <input type="submit" value="+ Add to cart"/>
+            </form>
+            <h4>$<?php echo $price; ?></h4>
          </div>
 <?php 
          } 

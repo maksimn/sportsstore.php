@@ -36,10 +36,14 @@
       }
 
       public function compute_total_price() {
-
+         $total_price = 0;
+         foreach($this->linecollection as $line) {
+            $total_price = $total_price + $line->product->price * $line->quantity;
+         }
+         return $total_price;
       }
       public function clear() {
-
+         $this->linecollection = array();
       }
       public function lines() {
          return $this->linecollection;

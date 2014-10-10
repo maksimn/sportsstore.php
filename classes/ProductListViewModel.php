@@ -1,6 +1,6 @@
 <?php
-   require_once("classes/ProductRepository.php");
-   require_once("classes/PagingInfo.php");
+   require_once("ProductRepository.php");
+   require_once("PagingInfo.php");
    // Модель-представление списка товаров:
    class ProductListViewModel {
       public $products;
