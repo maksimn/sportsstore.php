@@ -2,20 +2,31 @@
    require_once('header.php');
    require_once('classes/Product.php');
    require_once('classes/Cart.php');
-   // 1. Извлечь из БД товар с данным id
-   $prod = get_product($_GET['id']);
-   // 2. Добавить товар в корзину
    session_start();
+   $returnUrl = null;
    $cart = null;
-   if($_SESSION['cart'] != NULL) {
+   if(isset($_POST['productID'])) { // В случае POST-запроса
       $cart = $_SESSION['cart'];
+      $id = $_POST['productID'];
+      $prod = new Product(); 
+      $prod->productID = $id;
+      $cart->remove_line($prod);
+      $returnUrl = $_POST['returnUrl'];
    }
-   else {
-      $cart = new Cart();
-      $_SESSION['cart'] = $cart;
+   if(isset($_GET['id'])) { // В случае GET-запроса
+      // 1. Извлечь из БД товар с данным id
+      $prod = get_product($_GET['id']);
+      // 2. Добавить товар в корзину   
+      if($_SESSION['cart'] != NULL) {
+         $cart = $_SESSION['cart'];
+      }
+      else {
+         $cart = new Cart();
+         $_SESSION['cart'] = $cart;
+      }
+      $cart->add_item($prod, 1);
+      $returnUrl = $_GET['returnUrl'];
    }
-   $cart->add_item($prod, 1);
-   $returnUrl = $_GET['returnUrl'];
    // 3. Представление корзины
 ?>
 <h2>Your cart</h2>
@@ -35,6 +46,13 @@
             <td align="left"><?php echo $line->product->name; ?></td>
             <td align="right"><?php echo '$' . $line->product->price; ?></td>
             <td align="right"><?php echo $line->quantity * $line->product->price; ?></td>
+            <td>
+               <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
+                  <input type="hidden" name="productID" value="<?php echo $line->product->productID; ?>" />
+                  <input type="hidden" name="returnUrl" value="<?php echo $returnUrl; ?>" />
+                  <input type="submit" class="actionButtons" value="Remove" />
+               </form>
+            </td>
          </tr>
    <?php
       }
