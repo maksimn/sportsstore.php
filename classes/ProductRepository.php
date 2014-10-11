@@ -27,10 +27,8 @@
             <p><?php echo $description; ?></p>
             <form method="GET" action="cart.php">
                <input type="hidden" name="id" value="<?php echo $productID; ?>"/>
-<!--
                <input type="hidden" name="returnUrl" 
-                  value="<?php echo $_SERVER['SERVER_NAME'] . $_SERVER['REQUEST_URI'] . $_SERVER['QUERY_STRING']; ?>"/>
--->
+                  value="<?php echo $_SERVER['REQUEST_URI']; ?>"/>
                <input type="submit" value="+ Add to cart"/>
             </form>
             <h4>$<?php echo $price; ?></h4>
