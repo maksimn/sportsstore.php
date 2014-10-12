@@ -17,7 +17,7 @@
       // 1. Извлечь из БД товар с данным id
       $prod = get_product($_GET['id']);
       // 2. Добавить товар в корзину   
-      if($_SESSION['cart'] != NULL) {
+      if(isset($_SESSION['cart'])) {
          $cart = $_SESSION['cart'];
       }
       else {
@@ -25,7 +25,14 @@
          $_SESSION['cart'] = $cart;
       }
       $cart->add_item($prod, 1);
-      $returnUrl = $_GET['returnUrl'];
+      $returnUrl = isset($_GET['returnUrl']) ? $_GET['returnUrl'] : null;
+   }
+   if(isset($_SESSION['cart'])) {
+      $cart = $_SESSION['cart'];
+   }
+   else {
+      $cart = new Cart();
+      $_SESSION['cart'] = $cart;
    }
    // 3. Представление корзины
 ?>
@@ -64,7 +71,8 @@
    </tr></tfoot>
 </table>
 <p align="center" class="actionButtons">
-   <a href="<?php echo $returnUrl; ?>">Continue shopping</a>
+   <a href="<?php echo 'list.php'; ?>">Continue shopping</a>
+   <a href="checkout.php">Checkout now</a>
 </p>
 <?php   
    require_once('footer.php');

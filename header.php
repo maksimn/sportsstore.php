@@ -8,6 +8,7 @@
 </head>
 <body>
    <div id="header">
+      <?php require_once("CartSummary.php"); ?>
       <div class="title">SPORTS STORE</div>
    </div>
    <div id="categories">
