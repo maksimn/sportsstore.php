@@ -36,5 +36,14 @@
 <?php 
          } 
       }
+      public function show_extracted_data_for_admin() {
+         while ($row = mysqli_fetch_array($this->sql_query_result)) {
+            $productID = $row['ProductID'];
+            $name = $row['Name'];
+            $description = $row['Description'];
+            $price = $row['Price'];
+            $category = $row['Category'];
+         }
+      }
    }
 ?>
