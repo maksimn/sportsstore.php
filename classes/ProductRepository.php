@@ -62,9 +62,9 @@
                <td><a href="edit.php?id=<?php echo $productID; ?>"><?php echo $name; ?></a></td>
                <td class="NumericCol"><?php echo '$' . $price; ?></td>
                <td>
-                  <form method="POST" action="edit.php">
+                  <form method="POST" action="<?php echo $_SERVER['PHP_SELF']; ?>">
                      <input type="hidden" name="id" value="<?php echo $productID; ?>" />
-                     <input type="submit" value="Delete" />
+                     <input type="submit" name="submit" value="Delete" />
                   </form>
                </td>
             </tr>
@@ -72,8 +72,33 @@
          }
 ?>
       </table>
-      <p><a href="edit.php">Add a new product</a></p> 
 <?php
+      }
+      public function add_product($name, $description, $price, $category) {
+         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME);
+         $query = 'INSERT INTO Products (Name, Description, Category, Price) VALUES ("' . 
+                  $name . '", "'. $description .'", "' . $category . '", CAST(' . $price .' AS DECIMAL(16, 2)))';
+         echo $query . '<br>';
+         $sql_query_result = mysqli_query($dbc, $query) or die( 'Wrong db connection<br>');
+         if($sql_query_result == FALSE) {
+            echo '<p style="color:red;">The product was not added. </p><br/>';
+         }
+         else {
+            echo '<p style="color:blue;">The product was successfully added.</p><br/>';
+         }
+         mysqli_close($dbc);         
+      }
+      public function delete($id) {
+         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME);
+         $query = 'DELETE FROM Products WHERE ProductID = ' . $id;
+         $sql_query_result = mysqli_query($dbc, $query);
+         if($sql_query_result == FALSE) {
+            echo 'The product was not removed. <br/>';
+         }
+         else {
+            echo 'The product was successfully removed.<br/>';
+         }
+         mysqli_close($dbc);         
       }
    }
 ?>
