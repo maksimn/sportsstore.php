@@ -100,5 +100,12 @@
          }
          mysqli_close($dbc);         
       }
+      public function update($id, $name, $description, $price, $category) {
+         $dbc = mysqli_connect(DB_HOST, DB_USER, DB_PW, DB_NAME);
+         $query = "UPDATE Products SET Name='$name', Description='$description', Price=CAST($price AS DECIMAL(16,2)), Category='$category' WHERE ProductID = $id";
+         $sql_query_result = mysqli_query($dbc, $query);
+         mysqli_close($dbc);           
+         return $sql_query_result;
+      }
    }
 ?>
